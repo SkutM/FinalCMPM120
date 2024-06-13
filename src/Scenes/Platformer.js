@@ -5,6 +5,8 @@ class Platformer extends Phaser.Scene {
 
     preload() {
         this.load.audio('jumpSound1', 'assets/cartoon-jump-6462.mp3');
+        this.load.audio('coinGet', 'assets/coin-sound-effect-40620.mp3');
+        this.load.audio('keyGet', 'assets/key-twist-in-lock-47832.mp3');
         this.load.image('background1', 'assets/trust.png');
     }
 
@@ -20,6 +22,8 @@ class Platformer extends Phaser.Scene {
 
     create() {
         this.jumpSound = this.sound.add('jumpSound1');
+        this.coinSound = this.sound.add('coinGet');
+        this.keySound = this.sound.add('keyGet');
         let background = this.add.image(0, 0, 'background1').setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width * 2, this.cameras.main.height / 2);
         
@@ -52,11 +56,13 @@ class Platformer extends Phaser.Scene {
         this.physics.add.collider(my.sprite.player, this.groundLayer, this.checkDeath, null, this);
 
         this.physics.add.overlap(my.sprite.player, this.coinGroup, (obj1, obj2) => {
+            this.coinSound.play();
             obj2.destroy(); 
         });
 
         this.physics.add.overlap(my.sprite.player, this.keyGroup, (obj1, obj2) => {
             this.hasKey = true;
+            this.keySound.play();
             obj2.destroy(); 
         });
 

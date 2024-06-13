@@ -5,6 +5,8 @@ class Second extends Phaser.Scene {
 
     preload() {
         this.load.audio('jumpSound2', 'assets/video-game-jump-soundeffect-37532.mp3');
+        this.load.audio('coinGet', 'assets/coin-sound-effect-40620.mp3');
+        this.load.audio('keyGet', 'assets/key-twist-in-lock-47832.mp3');
         this.load.image('background2', 'assets/winter.jpg');
     }
 
@@ -21,6 +23,8 @@ class Second extends Phaser.Scene {
 
     create() {
         this.jumpSound = this.sound.add('jumpSound2');
+        this.coinSound = this.sound.add('coinGet');
+        this.keySound = this.sound.add('keyGet');
         let background = this.add.image(0, 0, 'background2').setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width * 4, this.cameras.main.height);
         
@@ -56,6 +60,7 @@ class Second extends Phaser.Scene {
         this.physics.add.collider(my.sprite.player, this.groundLayer, this.checkTileProperties, null, this);
 
         this.physics.add.overlap(my.sprite.player, this.coinGroup, (obj1, obj2) => {
+            this.coinSound.play();
             obj2.destroy(); 
         });
 
@@ -64,6 +69,7 @@ class Second extends Phaser.Scene {
         });
 
         this.physics.add.overlap(my.sprite.player, this.keyGroup, (obj1, obj2) => {
+            this.keySound.play();
             this.hasKey = true;
             obj2.destroy(); 
         });
