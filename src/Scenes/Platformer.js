@@ -4,7 +4,7 @@ class Platformer extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('jumpSound', 'assets/cartoon-jump-6462.mp3');
+        this.load.audio('jumpSound1', 'assets/cartoon-jump-6462.mp3');
         this.load.image('background1', 'assets/trust.png');
     }
 
@@ -19,7 +19,7 @@ class Platformer extends Phaser.Scene {
     }
 
     create() {
-        this.jumpSound = this.sound.add('jumpSound');
+        this.jumpSound = this.sound.add('jumpSound1');
         let background = this.add.image(0, 0, 'background1').setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width * 2, this.cameras.main.height / 2);
         

@@ -4,7 +4,7 @@ class Fourth extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('jumpSound', 'assets/cartoon-jump-6462.mp3');
+        this.load.audio('jumpSound4', 'assets/swing-whoosh-110410.mp3');
         this.load.image('background4', 'assets/endingmapphoto.jpg');
     }
 
@@ -13,14 +13,14 @@ class Fourth extends Phaser.Scene {
         this.DRAG = 500;    
         this.physics.world.gravity.y = 1500;
         this.JUMP_VELOCITY = -600;
-        this.SPRING_VELOCITY = -1200; // Velocity for spring jump
+        this.SPRING_VELOCITY = -1200; 
         this.PARTICLE_VELOCITY = 50;
         this.SCALE = 2.0;
         this.hasKey = false;
     }
 
     create() {
-        this.jumpSound = this.sound.add('jumpSound');
+        this.jumpSound = this.sound.add('jumpSound4');
         let background = this.add.image(0, 0, 'background4').setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width * 2, this.cameras.main.height);
         
@@ -30,7 +30,7 @@ class Fourth extends Phaser.Scene {
         this.groundLayer = this.map.createLayer("Ground-n-Platforms", this.tileset, 0, 0);
         this.groundLayer.setCollisionByProperty({ collides: true });
 
-        // Set collision for tiles with the 'death' and 'spring' property
+        
         this.groundLayer.setCollisionByProperty({ death: true, spring: true });
 
         this.coins = this.map.createFromObjects("Objects", { name: "coin", key: "tilemap_sheet", frame: 151 });
@@ -52,7 +52,7 @@ class Fourth extends Phaser.Scene {
         my.sprite.player = this.physics.add.sprite(30, 100, "platformer_characters", "tile_0000.png");
         my.sprite.player.setCollideWorldBounds(true);
 
-        // Add collision handler for ground layer
+        
         this.physics.add.collider(my.sprite.player, this.groundLayer, this.checkTileProperties, null, this);
 
         this.physics.add.overlap(my.sprite.player, this.coinGroup, (obj1, obj2) => {
